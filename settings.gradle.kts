@@ -1,3 +1,1 @@
-
-rootProject.name = "UrlShortener"
-
+rootProject.name = "com.mehrbod.urlshortener"
