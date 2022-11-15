@@ -1,8 +1,8 @@
 package com.mehrbod.dao
 
-import com.mehrbod.models.ShortenedUrl
+import com.mehrbod.models.Url
 
 interface DAOFacade {
-    suspend fun addShortenedUrl(originalUrl: String, shortenedUrl: String): ShortenedUrl?
-    suspend fun originalUrl(shortenedUrl: String): ShortenedUrl?
+    suspend fun addShortenedUrl(originalUrl: String, shortenedUrl: String): Url?
+    suspend fun originalUrl(shortenedUrl: String): Url?
 }
