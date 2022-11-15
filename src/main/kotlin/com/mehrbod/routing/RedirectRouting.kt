@@ -7,6 +7,11 @@ import io.ktor.server.routing.*
 fun Route.redirectRoute() {
     get("/{link}") {
         val shortUrl = call.parameters["link"]
-        call.respondRedirect(dao.originalUrl(shortUrl!!)?.originalUrl!!)
+        val originalUrl = shortUrl?.let { dao.originalUrl(shortUrl)?.originalUrl }
+        originalUrl?.let {
+            call.respondRedirect(originalUrl)
+        } ?: run {
+            call.respond("Not existent.")
+        }
     }
 }
