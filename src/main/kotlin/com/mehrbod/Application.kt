@@ -18,8 +18,8 @@ fun main() {
         }
 
         connector {
-            port = config.propertyOrNull("ktor.deployment.port")?.getString()?.toInt() ?: 8080
-            host = config.propertyOrNull("ktor.deployment.host")?.getString() ?: "0.0.0.0"
+            port = config.property("ktor.deployment.port").getString().toInt()
+            host = config.property("ktor.deployment.host").getString()
         }
     })
         .start(wait = true)
