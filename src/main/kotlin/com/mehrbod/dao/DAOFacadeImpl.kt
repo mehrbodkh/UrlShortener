@@ -26,6 +26,6 @@ class DAOFacadeImpl : DAOFacade {
             ShortenedUrls.shortenedUrl eq shortenedUrl
         }
             .map(::resultRowToShortenedUrl)
-            .singleOrNull()
+            .lastOrNull()
     }
 }
