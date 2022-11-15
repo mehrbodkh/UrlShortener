@@ -11,7 +11,7 @@ val memory = mutableMapOf<String, String>()
 fun Route.redirectRoute() {
     get("/{link}") {
         val shortUrl = call.parameters["link"]
-        call.respondRedirect(memory[shortUrl]!!)
+        call.respondRedirect(dao.originalUrl(shortUrl!!)?.originalUrl!!)
     }
 }
 
