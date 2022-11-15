@@ -17,7 +17,7 @@ object DatabaseFactory {
             SchemaUtils.create(ShortenedUrls)
         }
     }
-
-    suspend fun <T> dbQuery(block: suspend () -> T): T =
-        newSuspendedTransaction(Dispatchers.IO) { block() }
 }
+
+suspend fun <T> dbQuery(block: suspend () -> T): T =
+    newSuspendedTransaction(Dispatchers.IO) { block() }

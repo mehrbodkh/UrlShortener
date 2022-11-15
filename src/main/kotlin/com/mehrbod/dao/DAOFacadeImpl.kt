@@ -1,6 +1,5 @@
 package com.mehrbod.dao
 
-import com.mehrbod.dao.DatabaseFactory.dbQuery
 import com.mehrbod.models.ShortenedUrl
 import com.mehrbod.models.ShortenedUrls
 import org.jetbrains.exposed.sql.ResultRow
