@@ -8,10 +8,10 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
-    fun init() {
+    fun init(host: String, port: Int, databaseName: String, user: String) {
         val driverClassName = "org.postgresql.Driver"
-        val jdbcUrl = "jdbc:postgresql://localhost:5432/postgres"
-        val database = Database.connect(jdbcUrl, driverClassName, user = "postgres")
+        val jdbcUrl = "jdbc:postgresql://$host:$port/$databaseName"
+        val database = Database.connect(jdbcUrl, driverClassName, user = user)
 
         transaction(database) {
             SchemaUtils.create(ShortenedUrls)
