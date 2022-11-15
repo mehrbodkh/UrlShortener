@@ -6,8 +6,6 @@ import io.ktor.server.routing.*
 import java.math.BigInteger
 import java.security.MessageDigest
 
-val memory = mutableMapOf<String, String>()
-
 fun Route.redirectRoute() {
     get("/{link}") {
         val shortUrl = call.parameters["link"]
