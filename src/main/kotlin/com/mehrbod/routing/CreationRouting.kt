@@ -27,7 +27,9 @@ fun Route.creationRouting() {
         post("/api/url") {
             val incomingData = call.receive<InputRequest>()
             val shortened = incomingData.url.getShortUrl()
-            dao.addShortenedUrl(incomingData.url, shortened)
+            if (dao.originalUrl(shortened) == null) {
+                dao.addShortenedUrl(incomingData.url, shortened)
+            }
             call.respond(Response(shortened))
         }
     }
