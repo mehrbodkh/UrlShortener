@@ -12,10 +12,3 @@ fun Route.redirectRoute() {
         call.respondRedirect(dao.originalUrl(shortUrl!!)?.originalUrl!!)
     }
 }
-
-fun String.encodeToID(): String {
-    val hashBytes = MessageDigest.getInstance("MD5").digest(this.toByteArray(Charsets.UTF_8))
-    val hashString = String.format("%032x", BigInteger(1, hashBytes))
-    val truncatedHashString = hashString.take(6)
-    return truncatedHashString
-}
