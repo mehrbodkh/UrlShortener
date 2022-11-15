@@ -1,12 +1,13 @@
 package com.mehrbod
 
-import com.mehrbod.dao.DatabaseFactory
+import com.mehrbod.plugins.configureDatabase
+import com.mehrbod.plugins.configureRouting
+import com.mehrbod.plugins.configureSerialization
+import com.typesafe.config.ConfigFactory
 import io.ktor.server.application.*
+import io.ktor.server.config.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import com.mehrbod.plugins.*
-import com.typesafe.config.ConfigFactory
-import io.ktor.server.config.*
 
 fun main() {
     embeddedServer(Netty, environment = applicationEngineEnvironment {
@@ -25,12 +26,7 @@ fun main() {
 }
 
 fun Application.module() {
-    DatabaseFactory.init(
-        environment.config.property("ktor.database.host").getString(),
-        environment.config.property("ktor.database.port").getString().toInt(),
-        environment.config.property("ktor.database.databaseName").getString(),
-        environment.config.property("ktor.database.user").getString(),
-    )
+    configureDatabase()
     configureSerialization()
     configureRouting()
 }
