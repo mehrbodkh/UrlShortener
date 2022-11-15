@@ -7,6 +7,8 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
+import java.math.BigInteger
+import java.security.MessageDigest
 
 @Serializable
 data class InputRequest(
@@ -33,4 +35,10 @@ fun Route.creationRouting() {
 
 fun String.getShortUrl(): String {
     return this.encodeToID()
+}
+
+private fun String.encodeToID(): String {
+    val hashBytes = MessageDigest.getInstance("MD5").digest(this.toByteArray(Charsets.UTF_8))
+    val hashString = String.format("%032x", BigInteger(1, hashBytes))
+    return hashString.take(8)
 }
