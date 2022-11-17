@@ -1,7 +1,9 @@
 package com.mehrbod.routing
 
-import com.mehrbod.dao.DAOFacade
-import com.mehrbod.dao.DAOFacadeImpl
+import com.mehrbod.data.UrlRepository
+import com.mehrbod.data.UrlRepositoryImpl
+import com.mehrbod.data.dao.DAOFacade
+import com.mehrbod.data.dao.DAOFacadeImpl
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -20,15 +22,15 @@ data class Response(
     val shortUrl: String
 )
 
-val dao: DAOFacade = DAOFacadeImpl()
+val urlRepository: UrlRepository = UrlRepositoryImpl(DAOFacadeImpl())
 
 fun Route.creationRouting() {
     route("/create") {
         post("/api/url") {
             val incomingData = call.receive<InputRequest>()
             val shortened = incomingData.url.getShortUrl()
-            if (dao.originalUrl(shortened) == null) {
-                dao.addShortenedUrl(incomingData.url, shortened)
+            if (urlRepository.fetchUrl(shortened) == null) {
+                urlRepository.addUrl(incomingData.url, shortened)
             }
             call.respond(Response(shortened))
         }
