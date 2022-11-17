@@ -3,12 +3,13 @@ val kotlin_version: String by project
 val logback_version: String by project
 val exposed_version: String by project
 val hikaricp_version: String by project
+val koin_version: String by project
 
 plugins {
     application
     kotlin("jvm") version "1.7.20"
     id("io.ktor.plugin") version "2.1.3"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.7.20"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.20"
 }
 
 group = "com.mehrbod"
@@ -35,6 +36,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.postgresql:postgresql:42.5.0")
+    implementation("io.insert-koin:koin-core:$koin_version")
+    implementation("io.insert-koin:koin-ktor:$koin_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
