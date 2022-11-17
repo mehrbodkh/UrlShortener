@@ -1,6 +1,6 @@
-package com.mehrbod.dao
+package com.mehrbod.data.dao
 
-import com.mehrbod.models.ShortenedUrls
+import com.mehrbod.data.models.ShortenedUrls
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
