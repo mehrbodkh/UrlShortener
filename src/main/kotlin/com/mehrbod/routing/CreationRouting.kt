@@ -1,14 +1,12 @@
 package com.mehrbod.routing
 
 import com.mehrbod.data.UrlRepository
-import com.mehrbod.data.UrlRepositoryImpl
-import com.mehrbod.data.dao.DAOFacade
-import com.mehrbod.data.dao.DAOFacadeImpl
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
+import org.koin.ktor.ext.inject
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -22,9 +20,8 @@ data class Response(
     val shortUrl: String
 )
 
-val urlRepository: UrlRepository = UrlRepositoryImpl(DAOFacadeImpl())
-
 fun Route.creationRouting() {
+    val urlRepository: UrlRepository by inject()
     route("/create") {
         post("/api/url") {
             val incomingData = call.receive<InputRequest>()
